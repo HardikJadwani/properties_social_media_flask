@@ -1,0 +1,43 @@
+<table class="table table-hover">
+    <tr>
+        <td width="70px">
+            <a href="{{ url_for('main.user', username=property.owner.username) }}">
+                <img src="{{ property.owner.avatar(70) }}" />
+            </a>
+        </td>
+        <td>
+            <a href="{{ url_for('main.user', username=property.owner.username) }}">
+                {{ property.owner.username }}
+            </a>
+            had {{ moment(property.timestamp).fromNow() }}:
+            <br>
+            <div class="property-details">
+                {{ property.details }}
+                <br>
+                Location: {{ property.location }}
+                <br>
+                
+            </div>
+            <br>
+            <button class="learn-more-btn" onclick="toggleDetails(event)">Learn More</button>
+            <div class="additional-details" style="display: none;">
+                Basement: {% if property.basement %}Yes{% else %}No{% endif %}
+                <br>
+                Terrace: {% if property.terrace %}Yes{% else %}No{% endif %}
+                <br>
+                Garden: {% if property.garden %}Yes{% else %}No{% endif %}
+                <br>
+                Balcony: {% if property.balcony %}Yes{% else %}No{% endif %}
+            </div>
+
+            
+        </td>
+    </tr>
+</table>
+
+<script>
+    function toggleDetails(event) {
+        const detailsDiv = event.target.nextElementSibling;
+        detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
